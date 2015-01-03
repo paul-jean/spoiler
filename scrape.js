@@ -10,9 +10,17 @@ form.addEventListener("submit", function (event) {
   xhr.onreadystatechange = function (event) {
     var xhr = event.target;
     if (xhr.readyState === 4 && xhr.status === 200) {
-      var response = event.target.responseText;
+      var html = event.target.responseText;
       var responseArea = document.getElementById("response");
-      responseArea.innerHTML = response;
+      var sentenceRegex = /<p>([^\.]+)(?:\.|;|:|(<br>))?/g;
+      var sentences = html.match(sentenceRegex);
+      if (sentences.length > 1) {
+        sentences.shift();
+        var sentencesString = sentences.join("<br>");
+        responseArea.innerHTML = sentencesString;
+      } else {
+        responseArea.innerHTML = "(no sentences found)";
+      }
     }
   };
 });
