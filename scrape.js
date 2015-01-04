@@ -12,14 +12,23 @@ form.addEventListener("submit", function (event) {
     if (xhr.readyState === 4 && xhr.status === 200) {
       var html = event.target.responseText;
       var responseArea = document.getElementById("response");
-      var sentenceRegex = /<p>([^\.]+)(?:\.|;|:|(<br>))?/g;
+      var sentenceRegex = /<p>([^\.]{20,})(?:\.|;|:|(<br>))?/g;
       var sentences = html.match(sentenceRegex);
       if (sentences.length > 1) {
         sentences.shift();
-        var sentencesString = sentences.join("<br>");
-        responseArea.innerHTML = sentencesString;
+        var div, textNode, text;
+        sentences.forEach(function(sentence) {
+          console.log(sentence);
+          div = document.createElement("div");
+          div.className = "sentence";
+          textNode = document.createElement("p");
+          text = document.createTextNode(sentence);
+          textNode.appendChild(text);
+          div.appendChild(textNode);
+          responseArea.appendChild(div);
+        });
       } else {
-        responseArea.innerHTML = "(no sentences found)";
+        responseArea.appendChild(document.createTextNode("(no sentences found)"));
       }
     }
   };

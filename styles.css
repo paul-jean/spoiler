@@ -1,0 +1,16 @@
+/* Colors yanked from
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
+ * */
+div.sentence {
+  clear: both;
+  float: left;
+  background: rgba(231,228,157,.25);
+  border-style: solid;
+  border-color: rgba(231,228,157,.55);
+  border-width: 3px;
+  margin: 5px 0px;
+}
+
+.sentence p {
+  font-size: 12px;
+}
